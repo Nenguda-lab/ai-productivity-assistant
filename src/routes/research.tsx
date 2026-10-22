@@ -32,7 +32,6 @@ function ResearchPage() {
       return generate(
         `You are a careful research analyst. ${urlNote} Respond in plain text with these headings: SUMMARY, KEY INSIGHTS (bullets), RECOMMENDATIONS (bullets), ACTION POINTS (numbered). Be factual; say when you are uncertain.`,
         `${mode}:\n${input}`,
-        `${mode === "URL" ? "Note: URLs cannot be accessed in this app.\n\n" : ""}SUMMARY\n[Summary of: ${input.slice(0, 80)}]\n\nKEY INSIGHTS\n• [Insight]\n\nRECOMMENDATIONS\n• [Recommendation]\n\nACTION POINTS\n1. [Action]`,
       );
     });
 

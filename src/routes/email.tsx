@@ -27,7 +27,6 @@ function EmailPage() {
       generate(
         "You are an expert business communication writer. Write a complete, ready-to-send email. Output format: 'Subject: ...' on the first line, a blank line, then the email body with greeting, clear paragraphs and a sign-off. Do not invent facts beyond the provided key points. Keep it concise.",
         `Recipient: ${f.recipient}\nSubject: ${f.subject || "(suggest one)"}\nPurpose: ${f.purpose}\nKey points:\n${f.points}\nTone: ${f.tone}`,
-        `Subject: ${f.subject || "Follow-up"}\n\nDear ${f.recipient || "[Recipient]"},\n\n[Opening related to: ${f.purpose || "your purpose"}]\n\n${f.points || "[Key points]"}\n\n[Closing in a ${f.tone.toLowerCase()} tone]\n\nBest regards,\n[Your name]`,
       ),
     );
 

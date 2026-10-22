@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Mail, CalendarCheck, Search, KeyRound, ArrowRight } from "lucide-react";
+import { Mail, CalendarCheck, Search, ArrowRight } from "lucide-react";
 import { Card, PageHeader } from "@/components/Shell";
 import { loadItem, loadSettings, type Settings } from "@/lib/ai";
 
@@ -29,23 +29,14 @@ function Index() {
     setS(loadSettings());
     setSaved(Object.fromEntries(tools.map((t) => [t.key, !!loadItem(t.key)])));
   }, []);
-  const live = s && !s.demoMode && s.apiKey;
-
   return (
     <>
       <PageHeader title={`Welcome${s?.name ? `, ${s.name}` : ""} 👋`} subtitle="Your AI workplace assistant. What would you like to get done today?" />
       <div className="grid gap-4 sm:grid-cols-3 mb-6">
-        <Card><p className="text-sm text-muted-foreground">AI status</p><p className="text-xl font-semibold mt-1">{live ? "Connected" : "Demo mode"}</p></Card>
+        <Card><p className="text-sm text-muted-foreground">AI status</p><p className="text-xl font-semibold mt-1">Built-in & ready</p></Card>
         <Card><p className="text-sm text-muted-foreground">Saved results</p><p className="text-xl font-semibold mt-1">{Object.values(saved).filter(Boolean).length} / 3</p></Card>
-        <Card><p className="text-sm text-muted-foreground">Model</p><p className="text-xl font-semibold mt-1 truncate">{live ? s?.model : "—"}</p></Card>
+        <Card><p className="text-sm text-muted-foreground">Tools</p><p className="text-xl font-semibold mt-1">3</p></Card>
       </div>
-      {!live && (
-        <Card className="mb-6 bg-accent border-primary/20 flex flex-col sm:flex-row sm:items-center gap-3">
-          <KeyRound className="h-5 w-5 text-primary shrink-0" />
-          <p className="text-sm flex-1">You're in <b>demo mode</b> — outputs are clearly-labeled samples. Add your own API key to get real AI results.</p>
-          <Link to="/settings" className="text-sm font-medium text-primary">Open Settings →</Link>
-        </Card>
-      )}
       <h2 className="font-semibold mb-3">Quick actions</h2>
       <div className="grid gap-4 md:grid-cols-3">
         {tools.map((t) => (
