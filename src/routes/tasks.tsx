@@ -39,9 +39,8 @@ function TasksPage() {
       const out = await generate(
         `You are a realistic productivity planner. Build a ${range.toLowerCase()} schedule using at most ${hours} focused hours per day, including short breaks. Order by priority and deadline. Output ONLY a list, one item per line, format: "[Day if weekly] HH:MM–HH:MM · Task (Priority)". No intro or extra text. Flag any task that cannot fit with "⚠".`,
         `Today: ${new Date().toDateString()}\nTasks:\n${valid.map((t) => `- ${t.name} | deadline: ${t.deadline || "none"} | priority: ${t.priority}`).join("\n")}`,
-        valid.map((t, i) => `${9 + i}:00–${10 + i}:00 · ${t.name} (${t.priority})`).join("\n"),
       );
-      persist(out.split("\n").map((l) => l.replace(/^[-*\d.\s]+(?=\S)/, "").trim()).filter(Boolean).map((text) => ({ text, done: false })));
+      persist(out.split("\n").map((l) => l.replace(/^(?:[-*•]\s+|\d+[.)]\s+)/, "").trim()).filter(Boolean).map((text) => ({ text, done: false })));
     } catch (e) { setError(e instanceof Error ? e.message : "Something went wrong."); }
     finally { setLoading(false); }
   };
